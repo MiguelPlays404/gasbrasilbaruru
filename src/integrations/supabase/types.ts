@@ -14,16 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_audit_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json | null
+          id: string
+          review_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          review_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          review_id?: string | null
+        }
+        Relationships: []
+      }
+      review_submissions: {
+        Row: {
+          created_at: string
+          id: number
+          submitter_hash: string
+        }
+        Insert: {
+          created_at?: string
+          id?: never
+          submitter_hash: string
+        }
+        Update: {
+          created_at?: string
+          id?: never
+          submitter_hash?: string
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          comment: string
+          consent_to_publish: boolean
+          created_at: string
+          display_name: string
+          id: string
+          moderated_at: string | null
+          moderated_by: string | null
+          rating: number
+          status: Database["public"]["Enums"]["review_status"]
+        }
+        Insert: {
+          comment: string
+          consent_to_publish: boolean
+          created_at?: string
+          display_name: string
+          id?: string
+          moderated_at?: string | null
+          moderated_by?: string | null
+          rating: number
+          status?: Database["public"]["Enums"]["review_status"]
+        }
+        Update: {
+          comment?: string
+          consent_to_publish?: boolean
+          created_at?: string
+          display_name?: string
+          id?: string
+          moderated_at?: string | null
+          moderated_by?: string | null
+          rating?: number
+          status?: Database["public"]["Enums"]["review_status"]
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          key: string
+          updated_at: string
+          updated_by: string | null
+          value: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          updated_by?: string | null
+          value?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          updated_by?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      review_stats: {
+        Row: {
+          average: number | null
+          r1: number | null
+          r2: number | null
+          r3: number | null
+          r4: number | null
+          r5: number | null
+          total: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      review_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +287,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      review_status: ["pending", "approved", "rejected"],
+    },
   },
 } as const
