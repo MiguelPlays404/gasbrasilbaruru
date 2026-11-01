@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo-gas-brasil.asset.json";
 import { NAV, MSG, wa } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
+import { motion } from "motion/react";
+import { SPRING } from "@/lib/site";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,10 +24,15 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-border bg-background/85 backdrop-blur-md" : "bg-transparent"}`}>
-      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
+    <motion.header
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1, scale: scrolled ? 0.985 : 1 }}
+      transition={SPRING}
+      className="glass-pill fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[1.75rem] md:inset-x-6 md:top-4"
+    >
+      <div className="flex h-16 items-center justify-between gap-4 pl-4 pr-2 md:pl-5">
         <a href="#inicio" className="flex items-center gap-2" aria-label="Gás Brasil — início">
-          <img src={logo.url} alt="Gás Brasil" width={120} height={48} className="h-11 w-auto mix-blend-multiply md:h-14" />
+          <img src={logo.url} alt="Gás Brasil" width={120} height={48} className="h-10 w-auto rounded-lg mix-blend-multiply" />
         </a>
         <nav aria-label="Principal" className="hidden lg:block">
           <ul className="flex items-center gap-1">
@@ -43,7 +50,7 @@ export function Header() {
           </ul>
         </nav>
         <div className="flex items-center gap-2">
-          <a href={wa(MSG.hero)} target="_blank" rel="noopener noreferrer" className="hidden items-center gap-2 rounded-sm bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary-deep sm:inline-flex">
+          <a href={wa(MSG.hero)} target="_blank" rel="noopener noreferrer" className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary-deep sm:inline-flex">
             <WhatsAppIcon className="h-4 w-4" /> Pedir gás
           </a>
           <button type="button" onClick={() => setOpen((v) => !v)} className="p-2 lg:hidden" aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open}>
@@ -52,8 +59,8 @@ export function Header() {
         </div>
       </div>
       {open && (
-        <nav aria-label="Menu móvel" className="border-t border-border bg-background lg:hidden">
-          <ul className="container-page grid py-3">
+        <nav aria-label="Menu móvel" className="border-t border-foreground/10 lg:hidden">
+          <ul className="grid px-5 py-3">
             {NAV.map((n) => (
               <li key={n.id}>
                 <a href={`#${n.id}`} onClick={() => setOpen(false)} className={`block py-3 text-base font-medium ${active === n.id ? "text-primary" : ""}`}>{n.label}</a>
@@ -62,6 +69,6 @@ export function Header() {
           </ul>
         </nav>
       )}
-    </header>
+    </motion.header>
   );
 }

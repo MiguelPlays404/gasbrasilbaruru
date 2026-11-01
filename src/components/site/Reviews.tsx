@@ -6,6 +6,7 @@ import { submitReview } from "@/lib/reviews.functions";
 import { reviewInputSchema } from "@/lib/reviews.schema";
 import { GoogleIcon } from "./icons";
 import { Stars } from "./Stars";
+import { GOOGLE_RATING } from "@/lib/site";
 
 type Review = { id: string; display_name: string; rating: number; comment: string; created_at: string };
 type Stats = { total: number | null; average: number | null; r1: number | null; r2: number | null; r3: number | null; r4: number | null; r5: number | null };
@@ -41,7 +42,15 @@ export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { re
             </button>
           </div>
 
-          <div className="mt-12 border-t border-border pt-8">
+          <div className="mt-10 flex items-center gap-4 border-t border-border pt-8">
+            <GoogleIcon className="h-9 w-9" />
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Avaliações no Google</p>
+              <p className="mt-1 flex items-center gap-2"><span className="font-display text-3xl font-extrabold">{GOOGLE_RATING.value.toFixed(1).replace(".", ",")}</span><Stars value={GOOGLE_RATING.value} /><span className="text-sm text-muted-foreground">({GOOGLE_RATING.count} avaliações)</span></p>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-border pt-8">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Avaliações enviadas pelo site</p>
             {total > 0 ? (
               <div className="mt-4 flex items-end gap-6">
