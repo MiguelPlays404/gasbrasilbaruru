@@ -13,7 +13,8 @@ import { Reviews } from "@/components/site/Reviews";
 import { WhatsAppIcon } from "@/components/site/icons";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { getPublicReviews } from "@/lib/reviews.functions";
-import { MAPS_URL, MSG, NAV, PHONE_DISPLAY, PHONE_TEL, wa } from "@/lib/site";
+import { Reveal } from "@/components/site/Reveal";
+import { ADDRESS_CITY, ADDRESS_LINE, MAPS_URL, MSG, NAV, PHONE_DISPLAY, PHONE_TEL, wa } from "@/lib/site";
 
 const TITLE = "Gás Brasil — Entrega de gás em Bauru/SP | P-8, P-13 e P-20";
 const DESC = "Entrega, instalação e retirada de gás em toda Bauru. Botijões P-8, P-13 e P-20, aceitamos Gás do Povo e parcelamos em até 3x. Peça pelo WhatsApp.";
@@ -42,6 +43,7 @@ export const Route = createFileRoute("/")({
           telephone: "+55 14 99177-7941",
           areaServed: { "@type": "City", name: "Bauru", containedInPlace: "São Paulo, Brasil" },
           hasMap: MAPS_URL,
+          address: { "@type": "PostalAddress", streetAddress: "Av. Dr. Nuno de Assis, 1166", addressLocality: "Bauru", addressRegion: "SP", postalCode: "17010-120", addressCountry: "BR" },
           makesOffer: ["Botijão P-8 (8 kg)", "Botijão P-13 (13 kg)", "Botijão P-20 (20 kg)"].map((n) => ({ "@type": "Offer", itemOffered: { "@type": "Product", name: n } })),
         }),
       },
@@ -77,7 +79,7 @@ function Index() {
         {/* HERO */}
         <section id="inicio" className="relative overflow-hidden pt-24 md:pt-28">
           <div className="container-page grid items-center gap-10 pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24">
-            <div className="animate-rise">
+            <Reveal>
               <p className="eyebrow-line text-sm font-semibold text-secondary">Entrega rápida no seu bairro. Atendemos toda Bauru.</p>
               <h1 className="mt-5 text-[2.6rem] font-extrabold leading-[1.02] text-foreground sm:text-6xl lg:text-[4.2rem]">
                 Entrega de gás em <span className="text-primary">Bauru</span> com rapidez e praticidade.
@@ -98,8 +100,9 @@ function Index() {
                 <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-primary px-4 py-3 font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground">
                   <MapPin className="h-5 w-5" /> Ver nossa localização
                 </a>
+                <address className="text-center text-sm not-italic text-muted-foreground">{ADDRESS_LINE}, {ADDRESS_CITY}</address>
               </div>
-            </div>
+            </Reveal>
             <div className="relative">
               <div className="absolute -right-24 -top-10 hidden h-[110%] w-[70%] bg-primary lg:block" aria-hidden="true" />
               <img src={heroImg} alt="Entregador da Gás Brasil levando um botijão até a porta de uma casa em Bauru" width={1600} height={1104} fetchPriority="high" className="relative aspect-[4/3] w-full object-cover shadow-soft" />
@@ -117,7 +120,7 @@ function Index() {
               Nosso compromisso é facilitar sua rotina com atendimento próximo, praticidade e diferentes formas de receber seu gás.
             </p>
             <div className="mt-16 grid gap-10 border-t border-primary-foreground/20 pt-14 lg:grid-cols-[1fr_1.2fr]">
-              <h2 className="text-3xl font-extrabold leading-tight md:text-4xl">Mais do que entregar gás, <span className="text-secondary">facilitar o seu dia.</span></h2>
+              <Reveal><h2 className="text-3xl font-extrabold leading-tight md:text-4xl">Mais do que entregar gás, <span className="text-secondary">facilitar o seu dia.</span></h2></Reveal>
               <div className="space-y-5 text-lg text-primary-foreground/85">
                 <p>A Gás Brasil trabalha para tornar o acesso ao gás mais simples e prático para quem vive em Bauru. Com atendimento próximo e soluções que acompanham a necessidade de cada cliente, oferecemos diferentes formas de receber seu pedido: com entrega, instalação ou retirada diretamente no estabelecimento.</p>
                 <p>Nosso compromisso é proporcionar uma experiência de atendimento acessível, com praticidade, qualidade e atenção em cada pedido.</p>
@@ -129,7 +132,7 @@ function Index() {
         {/* ATENDIMENTO */}
         <section id="atendimento" className="py-20 md:py-28">
           <div className="container-page">
-            <h2 className="max-w-2xl text-4xl font-extrabold leading-[1.05] md:text-5xl">Você escolhe como prefere receber.</h2>
+            <Reveal><h2 className="max-w-2xl text-4xl font-extrabold leading-[1.05] md:text-5xl">Você escolhe como prefere receber.</h2></Reveal>
 
             <div className="mt-14 grid items-center gap-8 md:grid-cols-[1.2fr_1fr] md:gap-14">
               <img src={heroImg} alt="Entrega residencial de gás" width={1600} height={1104} loading="lazy" className="aspect-[16/10] w-full object-cover object-[30%_center]" />
@@ -167,7 +170,7 @@ function Index() {
         <section id="botijoes" className="bg-surface py-20 md:py-28">
           <div className="container-page">
             <div className="grid gap-6 md:grid-cols-2 md:items-end">
-              <h2 className="text-4xl font-extrabold leading-[1.05] md:text-5xl">Um tamanho para cada necessidade.</h2>
+              <Reveal><h2 className="text-4xl font-extrabold leading-[1.05] md:text-5xl">Um tamanho para cada necessidade.</h2></Reveal>
               <p className="text-lg text-muted-foreground">A Gás Brasil oferece diferentes opções de botijão para você encontrar o que precisa. Consulte a disponibilidade pelo nosso WhatsApp.</p>
             </div>
             <img src={botijoesImg} alt="Botijões de gás P-8, P-13 e P-20 lado a lado" width={1600} height={912} loading="lazy" className="mx-auto mt-10 w-full max-w-4xl mix-blend-multiply" />
@@ -201,7 +204,7 @@ function Index() {
           <div className="container-page grid items-center gap-12 lg:grid-cols-2">
             <div>
               <p className="inline-block bg-secondary px-3 py-1 font-display text-sm font-extrabold tracking-widest text-secondary-foreground">ACEITAMOS GÁS DO POVO</p>
-              <h2 className="mt-5 text-4xl font-extrabold leading-[1.05] md:text-5xl">Você também pode contar com o Gás do Povo!</h2>
+              <Reveal><h2 className="mt-5 text-4xl font-extrabold leading-[1.05] md:text-5xl">Você também pode contar com o Gás do Povo!</h2></Reveal>
               <p className="mt-5 text-lg text-muted-foreground">A Gás Brasil aceita o benefício Gás do Povo. Consulte nossa equipe pelo WhatsApp e saiba como realizar seu atendimento.</p>
               <div className="mt-6 flex items-center gap-6">
                 <img src={gasDoPovo.url} alt="Logotipo Gás do Povo" width={720} height={427} loading="lazy" className="h-20 w-auto mix-blend-multiply" />
@@ -214,7 +217,7 @@ function Index() {
           <div className="container-page mt-24 grid items-center gap-8 border-y border-border py-14 md:grid-cols-[auto_1fr] md:gap-14">
             <p className="font-display text-[8rem] font-extrabold leading-none text-secondary md:text-[11rem]" aria-hidden="true">3x</p>
             <div>
-              <h2 className="text-3xl font-extrabold md:text-4xl">Na hora de pagar, mais praticidade também.</h2>
+              <Reveal><h2 className="text-3xl font-extrabold md:text-4xl">Na hora de pagar, mais praticidade também.</h2></Reveal>
               <p className="mt-3 text-2xl font-semibold">Parcele seu gás em até <span className="text-secondary">3</span> vezes!</p>
               <p className="mt-2 text-lg text-muted-foreground">Consulte nossas condições de pagamento diretamente com a equipe.</p>
             </div>
@@ -227,8 +230,12 @@ function Index() {
         <section id="localizacao" className="bg-primary-deep py-20 text-primary-foreground md:py-28">
           <div className="container-page grid items-center gap-10 md:grid-cols-[1.3fr_1fr]">
             <div>
-              <h2 className="text-4xl font-extrabold leading-[1.05] md:text-5xl">A Gás Brasil está perto de você.</h2>
+              <Reveal><h2 className="text-4xl font-extrabold leading-[1.05] md:text-5xl">A Gás Brasil está perto de você.</h2></Reveal>
               <p className="mt-5 max-w-xl text-lg text-primary-foreground/80">Atendemos toda Bauru e estamos prontos para facilitar seu pedido. Consulte nossa localização e descubra como chegar até nós.</p>
+              <address className="mt-8 flex items-start gap-3 border-l-4 border-secondary pl-5 text-xl font-semibold not-italic">
+                <MapPin className="mt-1 h-6 w-6 shrink-0 text-secondary" aria-hidden="true" />
+                <span>{ADDRESS_LINE}<br />{ADDRESS_CITY}</span>
+              </address>
             </div>
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 rounded-sm bg-secondary px-8 py-5 text-lg font-bold text-secondary-foreground transition hover:brightness-95">
               <MapPin className="h-6 w-6" /> Como chegar
@@ -239,7 +246,7 @@ function Index() {
         {/* FAQ */}
         <section id="duvidas" className="py-20 md:py-28">
           <div className="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-            <h2 className="text-4xl font-extrabold leading-[1.05] md:text-5xl">Ficou alguma dúvida?</h2>
+            <Reveal><h2 className="text-4xl font-extrabold leading-[1.05] md:text-5xl">Ficou alguma dúvida?</h2></Reveal>
             <Accordion type="single" collapsible className="w-full">
               {FAQ.map(([q, a], i) => (
                 <AccordionItem key={q} value={`q${i}`}>
@@ -254,7 +261,7 @@ function Index() {
         {/* CTA FINAL */}
         <section className="bg-secondary py-20 text-secondary-foreground md:py-24">
           <div className="container-page text-center">
-            <h2 className="text-4xl font-extrabold md:text-6xl">Precisou de gás? Conte com a Gás Brasil!</h2>
+            <Reveal><h2 className="text-4xl font-extrabold md:text-6xl">Precisou de gás? Conte com a Gás Brasil!</h2></Reveal>
             <p className="mx-auto mt-5 max-w-2xl text-lg opacity-90">Peça agora mesmo e escolha como prefere receber: entregamos, instalamos ou você pode retirar no local.</p>
             <a href={wa(MSG.final)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-3 rounded-sm bg-primary px-8 py-5 text-lg font-extrabold text-primary-foreground shadow-soft transition hover:bg-primary-deep">
               <WhatsAppIcon className="h-6 w-6" /> PEDIR MEU GÁS PELO WHATSAPP
@@ -272,7 +279,7 @@ function Index() {
           <div className="space-y-2">
             <a href={PHONE_TEL} className="flex items-center gap-2 hover:text-secondary"><Phone className="h-4 w-4" /> {PHONE_DISPLAY}</a>
             <a href={wa(MSG.final)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-secondary"><WhatsAppIcon className="h-4 w-4" /> WhatsApp</a>
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-secondary"><MapPin className="h-4 w-4" /> Ver localização</a>
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-secondary"><MapPin className="h-4 w-4 shrink-0" /> {ADDRESS_LINE}, {ADDRESS_CITY}</a>
           </div>
           <nav aria-label="Rodapé">
             <ul className="grid grid-cols-2 gap-2 text-background/80">
