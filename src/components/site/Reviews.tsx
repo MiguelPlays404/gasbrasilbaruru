@@ -108,7 +108,7 @@ function ReviewForm() {
   const [comment, setComment] = useState("");
   const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<{ rating?: string; display_name?: string; comment?: string; consent_to_publish?: string }>({});
   const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
   const [serverError, setServerError] = useState("");
 
@@ -117,9 +117,9 @@ function ReviewForm() {
     setServerError("");
     const parsed = reviewInputSchema.safeParse({ display_name: name, rating, comment, consent_to_publish: consent });
     if (!parsed.success) {
-      const errs: Record<string, string> = {};
+      const errs: Record<string, string> = {} as Record<string, string>;
       parsed.error.issues.forEach((i) => { errs[String(i.path[0])] ??= i.message; });
-      setErrors(errs);
+      setErrors(errs as typeof errors);
       return;
     }
     setErrors({});

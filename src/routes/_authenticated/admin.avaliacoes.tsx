@@ -191,8 +191,8 @@ function Settings() {
     }
     const { data: u } = await supabase.auth.getUser();
     const { error } = await supabase.from("site_settings").upsert([
-      { key: "GOOGLE_REVIEW_URL", value: clean || null, updated_at: new Date().toISOString(), updated_by: u.user?.id },
-      { key: "REVIEWS_PUBLIC_ENABLED", value: enabled ? "true" : "false", updated_at: new Date().toISOString(), updated_by: u.user?.id },
+      { key: "GOOGLE_REVIEW_URL", value: clean || null, updated_at: new Date().toISOString(), updated_by: u.user?.id ?? null },
+      { key: "REVIEWS_PUBLIC_ENABLED", value: enabled ? "true" : "false", updated_at: new Date().toISOString(), updated_by: u.user?.id ?? null },
     ]);
     setMsg(error ? `Erro: ${error.message}` : "Configurações salvas.");
     qc.invalidateQueries({ queryKey: ["settings"] });
