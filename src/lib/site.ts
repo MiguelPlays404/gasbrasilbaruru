@@ -1,6 +1,6 @@
 export const PHONE_DISPLAY = "+55 14 99177-7941";
 export const PHONE_TEL = "tel:+5514991777941";
-export const MAPS_URL = "https://maps.app.goo.gl/BCmxMiSDEHpDEtp77";
+export const MAPS_URL = "https://maps.app.goo.gl/7swTfD3xbqgDToV79";
 
 export function wa(message: string) {
   return `https://wa.me/5514991777941?text=${encodeURIComponent(message)}`;
@@ -25,3 +25,8 @@ export const NAV = [
   { id: "avaliacoes", label: "Avaliações" },
   { id: "localizacao", label: "Localização" },
 ];
+
+export const ADDRESS_LINE = "Av. Dr. Nuno de Assis, 1166 - Centro";
+export const ADDRESS_CITY = "Bauru - SP, 17010-120";
+export const GOOGLE_RATING = { value: 4.8, count: 76 };
+export const SPRING = { type: "spring", stiffness: 260, damping: 26, mass: 0.9 } as const;
