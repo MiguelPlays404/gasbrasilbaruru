@@ -14,6 +14,7 @@ import { WhatsAppIcon } from "@/components/site/icons";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { getPublicReviews } from "@/lib/reviews.functions";
 import { Reveal } from "@/components/site/Reveal";
+import { RotatingWord } from "@/components/site/RotatingWord";
 import { ADDRESS_CITY, ADDRESS_LINE, MAPS_URL, MSG, NAV, PHONE_DISPLAY, PHONE_TEL, wa } from "@/lib/site";
 
 const TITLE = "Gás Brasil — Entrega de gás em Bauru/SP | P-8, P-13 e P-20";
@@ -94,7 +95,7 @@ function Index() {
             <Reveal>
               <p className="eyebrow-line text-sm font-semibold text-secondary">Entrega rápida no seu bairro. Atendemos toda Bauru.</p>
               <h1 className="mt-5 text-[2.6rem] font-extrabold leading-[1.02] text-foreground sm:text-6xl lg:text-[4.2rem]">
-                Entrega de gás em <span className="text-primary">Bauru</span> com rapidez e praticidade.
+                Entrega de gás em <RotatingWord /> com rapidez e praticidade.
               </h1>
               <p className="mt-6 max-w-xl text-lg text-muted-foreground">
                 Precisou de gás? Conte com a Gás Brasil. Levamos praticidade até você, com entrega, instalação e opção de retirada no local.
