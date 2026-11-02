@@ -28,8 +28,8 @@ export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { re
             A experiência de quem escolhe a Gás Brasil é muito importante para nós. Confira as avaliações e compartilhe também a sua experiência.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            {googleReviewUrl ? (
-              <a href={googleReviewUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-sm border border-input bg-surface px-5 py-3 font-semibold transition hover:border-primary">
+            {false ? (
+              <a href={googleReviewUrl ?? undefined} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-sm border border-input bg-surface px-5 py-3 font-semibold transition hover:border-primary">
                 <GoogleIcon className="h-5 w-5" /> Avaliar no Google
               </a>
             ) : (

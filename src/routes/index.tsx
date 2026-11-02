@@ -100,7 +100,7 @@ function Index() {
                 <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-sm border-2 border-primary px-4 py-3 font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground">
                   <MapPin className="h-5 w-5" /> Ver nossa localização
                 </a>
-                <address className="text-center text-sm not-italic text-muted-foreground">{ADDRESS_LINE}, {ADDRESS_CITY}</address>
+                <address className="text-center text-sm not-italic text-muted-foreground"><a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline transition-colors hover:text-primary">{ADDRESS_LINE}, {ADDRESS_CITY}</a></address>
               </div>
             </Reveal>
             <div className="relative">
@@ -234,7 +234,7 @@ function Index() {
               <p className="mt-5 max-w-xl text-lg text-primary-foreground/80">Atendemos toda Bauru e estamos prontos para facilitar seu pedido. Consulte nossa localização e descubra como chegar até nós.</p>
               <address className="mt-8 flex items-start gap-3 border-l-4 border-secondary pl-5 text-xl font-semibold not-italic">
                 <MapPin className="mt-1 h-6 w-6 shrink-0 text-secondary" aria-hidden="true" />
-                <span>{ADDRESS_LINE}<br />{ADDRESS_CITY}</span>
+                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline transition-colors hover:text-secondary">{ADDRESS_LINE}<br />{ADDRESS_CITY}</a>
               </address>
             </div>
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 rounded-sm bg-secondary px-8 py-5 text-lg font-bold text-secondary-foreground transition hover:brightness-95">
