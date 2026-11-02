@@ -79,8 +79,6 @@ export function LiquidGlassFilter({ targetRef, bezel = 16, depth = 18 }: Props) 
     const value = `url(#${id}) blur(var(--glass-blur, 1px)) saturate(1.4) brightness(1.06)`;
     let key = "";
     let timer = 0;
-    // A lente só vale no celular/tablet. No computador a barra é fosca (ver styles.css).
-    const mq = window.matchMedia("(max-width: 1023.98px)");
 
     const build = () => {
       const w = Math.round(el.offsetWidth), h = Math.round(el.offsetHeight);
@@ -102,7 +100,7 @@ export function LiquidGlassFilter({ targetRef, bezel = 16, depth = 18 }: Props) 
       el.style.removeProperty("backdrop-filter");
     };
     const apply = () => {
-      if (mq.matches && build()) {
+      if (build()) {
         el.style.setProperty("-webkit-backdrop-filter", value);
         el.style.setProperty("backdrop-filter", value);
       } else {
@@ -116,11 +114,9 @@ export function LiquidGlassFilter({ targetRef, bezel = 16, depth = 18 }: Props) 
       timer = window.setTimeout(apply, 120);
     });
     ro.observe(el);
-    mq.addEventListener("change", apply);
     return () => {
       window.clearTimeout(timer);
       ro.disconnect();
-      mq.removeEventListener("change", apply);
       clear();
     };
   }, [targetRef, id, bezel]);

@@ -85,6 +85,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    scripts: [
+      // Recarregar (F5) mantém a posição; entrar de novo no site começa sempre no topo.
+      { children: "(function(){try{var K=\"gb:scroll\",H=history,W=window;var n=performance.getEntriesByType(\"navigation\")[0];var reload=!!n&&n.type===\"reload\";H.scrollRestoration=\"manual\";var y=0;if(reload){y=parseInt(sessionStorage.getItem(K)||\"0\",10)||0}else{sessionStorage.removeItem(K)}if(location.hash){H.replaceState(H.state,\"\",location.pathname+location.search)}var moved=false;var mark=function(){moved=true};[\"wheel\",\"touchstart\",\"keydown\",\"mousedown\"].forEach(function(e){W.addEventListener(e,mark,{passive:true,once:true})});var restore=function(){if(!moved)W.scrollTo({top:y,left:0,behavior:\"instant\"})};document.addEventListener(\"DOMContentLoaded\",restore);W.addEventListener(\"load\",function(){restore();setTimeout(restore,250)});W.addEventListener(\"pageshow\",function(e){if(e.persisted){y=0;moved=false;W.scrollTo({top:0,left:0,behavior:\"instant\"})}});var t;var save=function(){try{sessionStorage.setItem(K,String(Math.round(W.scrollY)))}catch(e){}};W.addEventListener(\"scroll\",function(){clearTimeout(t);t=setTimeout(save,100)},{passive:true});W.addEventListener(\"pagehide\",save)}catch(e){}})();" },
+    ],
     links: [
       {
         rel: "stylesheet",

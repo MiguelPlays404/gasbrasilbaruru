@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { Star, CheckCircle2 } from "lucide-react";
@@ -15,6 +15,12 @@ const fmt = (d: string) => new Date(d).toLocaleDateString("pt-BR", { day: "2-dig
 
 export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { reviews: Review[]; stats: Stats; googleReviewUrl: string | null; publicEnabled: boolean }) {
   const [showForm, setShowForm] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
+  // Abre o formulário (se ainda estiver fechado) e rola a página até ele.
+  const openForm = () => {
+    setShowForm(true);
+    window.setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+  };
   const total = stats.total ?? 0;
   const avg = Number(stats.average ?? 0);
   const [featured, ...rest] = publicEnabled ? reviews : [];
@@ -37,7 +43,7 @@ export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { re
                 <GoogleIcon className="h-5 w-5 opacity-50" /> Avaliar no Google (em breve)
               </span>
             )}
-            <button type="button" onClick={() => setShowForm((v) => !v)} aria-expanded={showForm} aria-controls="form-avaliacao" className="inline-flex items-center justify-center gap-2 rounded-sm bg-secondary px-5 py-3 font-semibold text-secondary-foreground transition hover:brightness-95">
+            <button type="button" onClick={openForm} aria-expanded={showForm} aria-controls="form-avaliacao" className="inline-flex items-center justify-center gap-2 rounded-sm bg-secondary px-5 py-3 font-semibold text-secondary-foreground transition hover:brightness-95">
               <Star className="h-5 w-5" /> Deixar minha avaliação
             </button>
           </div>
@@ -81,7 +87,7 @@ export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { re
         </div>
 
         <div>
-          {showForm && <ReviewForm />}
+          {showForm && <div ref={formRef} className="scroll-mt-24"><ReviewForm /></div>}
           {featured && (
             <figure className={`${showForm ? "mt-12" : ""} border-l-4 border-secondary pl-6 md:pl-8`}>
               <Stars value={featured.rating} size="h-5 w-5" />
