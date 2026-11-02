@@ -34,9 +34,15 @@ export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { re
             A experiência de quem escolhe a Gás Brasil é muito importante para nós. Confira as avaliações e compartilhe também a sua experiência.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="https://search.google.com/local/writereview?placeid=ChIJB9oKxnRnv5QR3ts69sbKupc" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-sm border border-input bg-surface px-5 py-3 font-semibold transition hover:border-primary">
-              <GoogleIcon className="h-5 w-5" /> Avaliar no Google
-            </a>
+            {false ? (
+              <a href={googleReviewUrl ?? undefined} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-sm border border-input bg-surface px-5 py-3 font-semibold transition hover:border-primary">
+                <GoogleIcon className="h-5 w-5" /> Avaliar no Google
+              </a>
+            ) : (
+              <span className="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-sm border border-dashed border-input px-5 py-3 text-sm text-muted-foreground" title="Link de avaliação ainda não configurado">
+                <GoogleIcon className="h-5 w-5 opacity-50" /> Avaliar no Google (em breve)
+              </span>
+            )}
             <button type="button" onClick={openForm} aria-expanded={showForm} aria-controls="form-avaliacao" className="inline-flex items-center justify-center gap-2 rounded-sm bg-secondary px-5 py-3 font-semibold text-secondary-foreground transition hover:brightness-95">
               <Star className="h-5 w-5" /> Deixar minha avaliação
             </button>
