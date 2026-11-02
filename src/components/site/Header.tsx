@@ -11,6 +11,7 @@ export function Header() {
   const [active, setActive] = useState("inicio");
   const [hovered, setHovered] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -25,7 +26,8 @@ export function Header() {
   useEffect(() => {
     if (!open) return;
     const onPointer = (e: PointerEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(false);
+      const t = e.target as Node;
+      if (!headerRef.current?.contains(t) && !menuRef.current?.contains(t)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.addEventListener("pointerdown", onPointer);
@@ -47,6 +49,7 @@ export function Header() {
   };
 
   return (
+    <>
     <motion.header
       ref={headerRef}
       initial={{ y: -40, opacity: 0 }}
@@ -105,13 +108,15 @@ export function Header() {
         </div>
       </div>
 
-      {/* Menu do celular: painel que desce da barra (só opacity/transform) */}
+    </motion.header>
+    {/* Menu do celular: painel de vidro igual à barra, fora dela (só opacity/transform animam) */}
       <nav
+        ref={menuRef}
         id="menu-movel"
         aria-label="Menu móvel"
         aria-hidden={!open}
         data-open={open}
-        className="mobile-menu absolute inset-x-0 top-[calc(100%+0.5rem)] overflow-hidden rounded-[1.5rem] border border-foreground/10 bg-surface shadow-soft lg:hidden"
+        className="mobile-menu glass-pill fixed inset-x-3 top-[5.25rem] z-50 mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] md:inset-x-6 md:top-[5.5rem] lg:hidden"
         {...(!open ? { inert: true } : {})}
       >
         <ul className="grid px-4 py-3">
@@ -127,6 +132,6 @@ export function Header() {
           </a>
         </div>
       </nav>
-    </motion.header>
+    </>
   );
 }
