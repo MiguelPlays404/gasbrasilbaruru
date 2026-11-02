@@ -14,8 +14,8 @@ type Stats = { total: number | null; average: number | null; r1: number | null; 
 const fmt = (d: string) => new Date(d).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
 
 export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { reviews: Review[]; stats: Stats; googleReviewUrl: string | null; publicEnabled: boolean }) {
-  // Link do Google: usa o do painel admin se existir; senão, o link oficial fixo.
-  const reviewUrl = googleReviewUrl || GOOGLE_REVIEW_URL;
+  // Link do Google: sempre o link oficial fixo (ignora o valor salvo no painel admin).
+  const reviewUrl = GOOGLE_REVIEW_URL;
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
   // Abre o formulário (se ainda estiver fechado) e rola a página até ele.
