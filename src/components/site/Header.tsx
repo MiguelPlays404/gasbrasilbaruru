@@ -14,14 +14,50 @@ export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLElement>(null);
 
+  // Seção atual = a que está na "linha de leitura" (um pouco abaixo do topo).
+  // Ao clicar num item, ele fica travado como atual até a pessoa rolar sozinha;
+  // assim a gota não passeia pelas seções do caminho nem muda de lugar no fim.
+  const lockRef = useRef<string | null>(null);
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    NAV.forEach((n) => { const el = document.getElementById(n.id); if (el) obs.observe(el); });
-    return () => obs.disconnect();
+    const ids = NAV.map((n) => n.id);
+    let raf = 0;
+    const compute = () => {
+      raf = 0;
+      if (lockRef.current) { setActive(lockRef.current); return; }
+      let id = ids[0];
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+        id = ids[ids.length - 1]; // chegou no fim da página
+      } else {
+        const line = Math.max(120, window.innerHeight * 0.35);
+        for (const i of ids) {
+          const el = document.getElementById(i);
+          if (el && el.getBoundingClientRect().top <= line) id = i;
+        }
+      }
+      setActive(id);
+    };
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(compute); };
+    const release = () => { if (lockRef.current) { lockRef.current = null; schedule(); } };
+    const onKey = (e: KeyboardEvent) => {
+      if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(e.key)) release();
+    };
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("wheel", release, { passive: true });
+    window.addEventListener("touchstart", release, { passive: true });
+    window.addEventListener("keydown", onKey);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      window.removeEventListener("wheel", release);
+      window.removeEventListener("touchstart", release);
+      window.removeEventListener("keydown", onKey);
+    };
   }, []);
+
+  const select = (id: string) => { lockRef.current = id; setActive(id); };
 
   // Fecha o menu ao tocar fora ou apertar Esc.
   useEffect(() => {
@@ -41,6 +77,7 @@ export function Header() {
 
   const go = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
+    select(id);
     setOpen(false);
     // espera o menu terminar de fechar para a rolagem não competir com a animação
     window.setTimeout(() => {
@@ -64,7 +101,7 @@ export function Header() {
         <a href="#inicio" className="flex shrink-0 items-center gap-2" aria-label="Gás Brasil — início">
           <img src={logo.url} alt="Gás Brasil" width={120} height={48} className="h-10 w-auto rounded-lg mix-blend-multiply" />
         </a>
-        <LiquidNav items={NAV} active={active} />
+        <LiquidNav items={NAV} active={active} onSelect={select} />
         <div className="col-start-3 flex shrink-0 items-center gap-2">
           <a href={wa(MSG.hero)} target="_blank" rel="noopener noreferrer" className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground whitespace-nowrap transition hover:bg-primary-deep sm:inline-flex">
             <WhatsAppIcon className="h-4 w-4" /> Pedir gás

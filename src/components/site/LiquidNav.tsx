@@ -120,7 +120,7 @@ function initGL(canvas: HTMLCanvasElement): GLC | null {
   return { gl, u };
 }
 
-export function LiquidNav({ items, active }: { items: readonly Item[]; active: string }) {
+export function LiquidNav({ items, active, onSelect }: { items: readonly Item[]; active: string; onSelect?: (id: string) => void }) {
   const activeIdx = Math.max(0, items.findIndex((n) => n.id === active));
   const [hover, setHover] = useState<number | null>(null);
   const target = hover ?? activeIdx;
@@ -131,6 +131,15 @@ export function LiquidNav({ items, active }: { items: readonly Item[]; active: s
   const dropRef = useRef<HTMLSpanElement>(null);
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const st = useRef(makeState());
+
+  // Pequena "intenção" no hover: se o mouse só passa voando, a gota não sai pulando por todos os itens.
+  const hoverTimer = useRef(0);
+  const hoverTo = (i: number | null, delay = 0) => {
+    window.clearTimeout(hoverTimer.current);
+    if (delay) hoverTimer.current = window.setTimeout(() => setHover(i), delay);
+    else setHover(i);
+  };
+  useEffect(() => () => window.clearTimeout(hoverTimer.current), []);
 
   /* ---- desenho ---- */
   const draw = useCallback(() => {
@@ -187,7 +196,7 @@ export function LiquidNav({ items, active }: { items: readonly Item[]; active: s
       bodies.forEach((B, i) => {
         const lead = i === s.lead;
         const k = lead ? 210 : 72;
-        const c = lead ? 25 : 13;
+        const c = lead ? 28 : 15;
         const f = !lead && now < s.lagFrom ? 0.08 : 1;
         B.v += (k * (T.x - B.x) - c * B.v) * dt * f;
         B.x += B.v * dt;
@@ -210,13 +219,13 @@ export function LiquidNav({ items, active }: { items: readonly Item[]; active: s
       if (!s.split && s.moving && sep - 2 * T.q - 2 * r > -6) {
         s.split = true;
         const lo = bodies[1 - s.lead], hi = bodies[s.lead];
-        [0.3, 0.5, 0.72].forEach((t, j) => {
+        [0.4, 0.66].forEach((t, j) => {
           s.sats.push({
             x: lo.x + (hi.x - lo.x) * t + (Math.random() - 0.5) * 6,
             y: T.cy + (Math.random() - 0.5) * 10,
             vx: (lo.v + hi.v) * 0.45,
             vy: (Math.random() - 0.5) * 60,
-            r: 5 + Math.random() * 3 - j * 0.5,
+            r: 4 + Math.random() * 2 - j * 0.5,
             k: 70 + Math.random() * 90,
           });
         });
@@ -235,7 +244,7 @@ export function LiquidNav({ items, active }: { items: readonly Item[]; active: s
     }
     if (s.moving && still) {
       s.moving = false;
-      if (s.split || !s.reduce) s.rips.push({ x: T.x, y: T.cy, age: 0, amp: s.split ? 1.2 : 0.7 });
+      if (s.split || !s.reduce) s.rips.push({ x: T.x, y: T.cy, age: 0, amp: s.split ? 0.8 : 0.4 });
     }
     s.rips.forEach((p) => (p.age += dt));
     s.rips = s.rips.filter((p) => p.age < 2.4);
@@ -364,7 +373,7 @@ export function LiquidNav({ items, active }: { items: readonly Item[]; active: s
         className="liquid-nav relative flex items-center gap-1 whitespace-nowrap"
         onPointerMove={onMove}
         onPointerDown={onDown}
-        onPointerLeave={() => { st.current.mouse.on = false; setHover(null); loop(); }}
+        onPointerLeave={() => { st.current.mouse.on = false; hoverTo(null); loop(); }}
       >
         <canvas className="liquid-nav-water" ref={canvasRef} aria-hidden="true" />
         <span className="liquid-nav-drop" ref={dropRef} aria-hidden="true" />
@@ -373,9 +382,10 @@ export function LiquidNav({ items, active }: { items: readonly Item[]; active: s
             <a
               ref={(el) => { itemRefs.current[i] = el; }}
               href={`#${n.id}`}
-              onPointerEnter={(e) => e.pointerType === "mouse" && setHover(i)}
-              onFocus={() => setHover(i)}
-              onBlur={() => setHover(null)}
+              onPointerEnter={(e) => e.pointerType === "mouse" && hoverTo(i, 55)}
+              onFocus={() => hoverTo(i)}
+              onBlur={() => hoverTo(null)}
+              onClick={() => { hoverTo(i); onSelect?.(n.id); }}
               aria-current={active === n.id ? "true" : undefined}
               className={`relative flex h-10 items-center rounded-full px-3.5 text-sm font-medium transition-colors duration-200 xl:px-4 ${target === i ? "text-primary" : "text-foreground/80"}`}
             >
