@@ -79,34 +79,49 @@ export function LiquidGlassFilter({ targetRef, bezel = 16, depth = 18 }: Props) 
     const value = `url(#${id}) blur(var(--glass-blur, 1px)) saturate(1.4) brightness(1.06)`;
     let key = "";
     let timer = 0;
+    // A lente só vale no celular/tablet. No computador a barra é fosca (ver styles.css).
+    const mq = window.matchMedia("(max-width: 1023.98px)");
 
     const build = () => {
       const w = Math.round(el.offsetWidth), h = Math.round(el.offsetHeight);
-      if (w < 16 || h < 16) return; // escondido (ex.: menu no desktop)
+      if (w < 16 || h < 16) return false; // escondido
       const r = Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || h / 2, h / 2, w / 2);
       const k = `${w}x${h}x${r}`;
-      if (k === key) return;
-      const url = makeMap(w, h, r, bezel);
-      if (!url) return;
-      key = k;
-      img.setAttribute("href", url);
-      img.setAttribute("width", String(w));
-      img.setAttribute("height", String(h));
-      el.style.setProperty("-webkit-backdrop-filter", value);
-      el.style.setProperty("backdrop-filter", value);
+      if (k !== key) {
+        const url = makeMap(w, h, r, bezel);
+        if (!url) return false;
+        key = k;
+        img.setAttribute("href", url);
+        img.setAttribute("width", String(w));
+        img.setAttribute("height", String(h));
+      }
+      return true;
+    };
+    const clear = () => {
+      el.style.removeProperty("-webkit-backdrop-filter");
+      el.style.removeProperty("backdrop-filter");
+    };
+    const apply = () => {
+      if (mq.matches && build()) {
+        el.style.setProperty("-webkit-backdrop-filter", value);
+        el.style.setProperty("backdrop-filter", value);
+      } else {
+        clear();
+      }
     };
 
-    build();
+    apply();
     const ro = new ResizeObserver(() => {
       window.clearTimeout(timer);
-      timer = window.setTimeout(build, 120);
+      timer = window.setTimeout(apply, 120);
     });
     ro.observe(el);
+    mq.addEventListener("change", apply);
     return () => {
       window.clearTimeout(timer);
       ro.disconnect();
-      el.style.removeProperty("-webkit-backdrop-filter");
-      el.style.removeProperty("backdrop-filter");
+      mq.removeEventListener("change", apply);
+      clear();
     };
   }, [targetRef, id, bezel]);
 
