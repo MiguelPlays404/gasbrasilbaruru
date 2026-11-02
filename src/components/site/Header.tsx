@@ -4,6 +4,7 @@ import logo from "@/assets/logo-gas-brasil.asset.json";
 import { NAV, MSG, wa } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
 import { motion } from "motion/react";
+import { LiquidGlassFilter } from "./LiquidGlassFilter";
 import { SPRING } from "@/lib/site";
 
 export function Header() {
@@ -50,6 +51,8 @@ export function Header() {
 
   return (
     <>
+    <LiquidGlassFilter targetRef={headerRef} bezel={16} depth={18} />
+    <LiquidGlassFilter targetRef={menuRef} bezel={22} depth={20} />
     <motion.header
       ref={headerRef}
       initial={{ y: -40, opacity: 0 }}
@@ -122,7 +125,7 @@ export function Header() {
         <ul className="grid px-4 py-3">
           {NAV.map((n) => (
             <li key={n.id}>
-              <a href={`#${n.id}`} onClick={(e) => go(e, n.id)} className={`block rounded-xl px-3 py-3 text-base font-medium transition-colors duration-200 hover:text-primary active:bg-primary/15 ${active === n.id ? "text-primary" : "text-foreground"}`}>{n.label}</a>
+              <a href={`#${n.id}`} onClick={(e) => go(e, n.id)} className={`block rounded-xl px-3 py-3 text-base font-semibold transition-colors duration-200 hover:text-primary active:bg-primary/15 ${active === n.id ? "text-primary" : "text-foreground"}`}>{n.label}</a>
             </li>
           ))}
         </ul>
