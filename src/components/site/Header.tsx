@@ -122,7 +122,7 @@ export function Header() {
         <ul className="grid px-4 py-3">
           {NAV.map((n) => (
             <li key={n.id}>
-              <a href={`#${n.id}`} onClick={(e) => go(e, n.id)} className={`block rounded-xl px-3 py-3 text-base font-medium transition-colors duration-200 active:bg-primary/15 ${active === n.id ? "text-primary" : "text-foreground"}`}>{n.label}</a>
+              <a href={`#${n.id}`} onClick={(e) => go(e, n.id)} className={`block rounded-xl px-3 py-3 text-base font-medium transition-colors duration-200 hover:text-primary active:bg-primary/15 ${active === n.id ? "text-primary" : "text-foreground"}`}>{n.label}</a>
             </li>
           ))}
         </ul>
