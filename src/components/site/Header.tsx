@@ -10,6 +10,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("inicio");
+  const [hovered, setHovered] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -46,18 +47,30 @@ export function Header() {
           <img src={logo.url} alt="Gás Brasil" width={120} height={48} className="h-10 w-auto rounded-lg mix-blend-multiply" />
         </a>
         <nav aria-label="Principal" className="hidden justify-self-center lg:block">
-          <ul className="flex items-center gap-1 whitespace-nowrap">
-            {NAV.map((n) => (
+          <ul className="flex items-center gap-1 whitespace-nowrap" onMouseLeave={() => setHovered(null)}>
+            {NAV.map((n) => {
+              const highlighted = (hovered ?? active) === n.id;
+              return (
               <li key={n.id}>
                 <a
                   href={`#${n.id}`}
+                  onMouseEnter={() => setHovered(n.id)}
+                  onFocus={() => setHovered(n.id)}
                   aria-current={active === n.id ? "true" : undefined}
-                  className={`relative rounded-full px-3 py-2 text-sm xl:px-3.5 font-medium transition-colors hover:text-primary ${active === n.id ? "text-primary after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:bg-secondary" : "text-foreground/80"}`}
+                  className={`relative rounded-full px-3 py-2 text-sm xl:px-3.5 font-medium transition-colors duration-200 ${highlighted ? "text-primary" : "text-foreground/80"}`}
                 >
                   {n.label}
+                  {highlighted && (
+                    <motion.span
+                      layoutId="nav-underline"
+                      transition={SPRING}
+                      className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-secondary"
+                    />
+                  )}
                 </a>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </nav>
         <div className="col-start-3 flex shrink-0 items-center gap-2">
@@ -83,7 +96,7 @@ export function Header() {
             <ul className="grid px-5 py-3">
               {NAV.map((n, i) => (
                 <motion.li key={n.id} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ ...SPRING, delay: i * 0.03 }}>
-                  <a href={`#${n.id}`} onClick={(e) => go(e, n.id)} className={`block rounded-xl px-2 py-3 active:bg-foreground/5 text-base font-medium ${active === n.id ? "text-primary" : ""}`}>{n.label}</a>
+                  <a href={`#${n.id}`} onClick={(e) => go(e, n.id)} className={`block rounded-xl px-2 py-3 text-base font-medium transition-colors duration-200 hover:bg-primary/10 hover:text-primary active:bg-primary/15 ${active === n.id ? "text-primary" : ""}`}>{n.label}</a>
                 </motion.li>
               ))}
             </ul>
