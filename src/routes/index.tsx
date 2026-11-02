@@ -20,7 +20,19 @@ const TITLE = "Gás Brasil — Entrega de gás em Bauru/SP | P-8, P-13 e P-20";
 const DESC = "Entrega, instalação e retirada de gás em toda Bauru. Botijões P-8, P-13 e P-20, aceitamos Gás do Povo e parcelamos em até 3x. Peça pelo WhatsApp.";
 
 export const Route = createFileRoute("/")({
-  loader: () => getPublicReviews(),
+  loader: async () => {
+    try {
+      return await getPublicReviews();
+    } catch (e) {
+      console.warn("Falha ao carregar avaliações", e);
+      return {
+        reviews: [],
+        stats: { total: 0, average: 0, r1: 0, r2: 0, r3: 0, r4: 0, r5: 0 },
+        googleReviewUrl: null as string | null,
+        publicEnabled: true,
+      };
+    }
+  },
   head: () => ({
     meta: [
       { title: TITLE },
