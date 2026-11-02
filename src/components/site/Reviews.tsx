@@ -6,7 +6,7 @@ import { submitReview } from "@/lib/reviews.functions";
 import { reviewInputSchema } from "@/lib/reviews.schema";
 import { GoogleIcon } from "./icons";
 import { Stars } from "./Stars";
-import { GOOGLE_RATING } from "@/lib/site";
+import { GOOGLE_RATING, GOOGLE_REVIEW_URL } from "@/lib/site";
 
 type Review = { id: string; display_name: string; rating: number; comment: string; created_at: string };
 type Stats = { total: number | null; average: number | null; r1: number | null; r2: number | null; r3: number | null; r4: number | null; r5: number | null };
@@ -14,6 +14,8 @@ type Stats = { total: number | null; average: number | null; r1: number | null; 
 const fmt = (d: string) => new Date(d).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
 
 export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { reviews: Review[]; stats: Stats; googleReviewUrl: string | null; publicEnabled: boolean }) {
+  // Link do Google: usa o do painel admin se existir; senão, o link oficial fixo.
+  const reviewUrl = googleReviewUrl || GOOGLE_REVIEW_URL;
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
   // Abre o formulário (se ainda estiver fechado) e rola a página até ele.
@@ -34,8 +36,8 @@ export function Reviews({ reviews, stats, googleReviewUrl, publicEnabled }: { re
             A experiência de quem escolhe a Gás Brasil é muito importante para nós. Confira as avaliações e compartilhe também a sua experiência.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            {false ? (
-              <a href={googleReviewUrl ?? undefined} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-sm border border-input bg-surface px-5 py-3 font-semibold transition hover:border-primary">
+            {reviewUrl ? (
+              <a href={reviewUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-sm border border-input bg-surface px-5 py-3 font-semibold transition hover:border-primary">
                 <GoogleIcon className="h-5 w-5" /> Avaliar no Google
               </a>
             ) : (

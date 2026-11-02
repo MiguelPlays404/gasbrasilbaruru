@@ -28,5 +28,6 @@ export const NAV = [
 
 export const ADDRESS_LINE = "Av. Dr. Nuno de Assis, 1166 - Centro";
 export const ADDRESS_CITY = "Bauru - SP, 17010-120";
+export const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJB9oKxnRnv5QR3ts69sbKupc";
 export const GOOGLE_RATING = { value: 4.8, count: 76 };
 export const SPRING = { type: "spring", stiffness: 260, damping: 26, mass: 0.9 } as const;
