@@ -11,3 +11,5 @@
 
 - Public review submission goes through `submitReview` server fn (honeypot, hashed rate limit, admin client insert as pending); public reads use a publishable-key server client so approved reviews SSR into HTML.
 - Review moderation runs from the browser client under RLS (admins only via `has_role`); a DB trigger enforces status-only updates and writes moderated_at/by plus the audit log.
+- Cylinder sizes share one browser-safe catalog for display, FAQ-related metadata and structured offers to prevent inconsistent product sizes.
+- Desktop navigation uses one persistent measured underline rather than conditional shared-layout elements to avoid disappearing during pointer transitions; the header responds to scroll activity with spring movement and reduced-motion support.
