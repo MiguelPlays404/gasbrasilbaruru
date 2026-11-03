@@ -180,15 +180,3 @@
 @media (prefers-reduced-motion: reduce) {
   .rotating-slot, .rotating-word, .mobile-menu { transition: none; }
 }
-
-/* Gota de vidro do menu do computador (LiquidNav.tsx) */
-.liquid-nav { isolation: isolate; }
-.liquid-nav-water { position: absolute; left: -14px; top: -14px; z-index: -1; pointer-events: none; }
-.liquid-nav[data-gl="off"] .liquid-nav-water { display: none; }
-.liquid-nav-drop {
-  display: none; position: absolute; top: 0; bottom: 0; left: 0; z-index: -1; pointer-events: none;
-  border-radius: 999px; will-change: transform, width;
-  background: radial-gradient(120% 140% at 30% 0%, rgba(255,255,255,.75), rgba(255,255,255,0) 55%), rgba(255,255,255,.38);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,.95), inset 0 -2px 6px rgba(20,110,60,.20), inset 0 0 0 1px rgba(255,255,255,.55), 0 6px 16px -6px rgba(10,60,30,.35);
-}
-.liquid-nav[data-gl="off"] .liquid-nav-drop { display: block; }
