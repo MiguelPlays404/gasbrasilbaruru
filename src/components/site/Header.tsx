@@ -22,7 +22,7 @@ export function Header() {
       if (lockRef.current) { setActive(lockRef.current); return; }
       let id: string = ids[0] ?? "inicio";
       if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
-        id = ids[ids.length - 1]; // chegou no fim da página
+        id = ids[ids.length - 1] ?? "inicio"; // chegou no fim da página
       } else {
         const line = Math.max(120, window.innerHeight * 0.35);
         for (const i of ids) {
