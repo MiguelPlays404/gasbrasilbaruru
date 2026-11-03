@@ -142,49 +142,6 @@
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @utility animate-rise { animation: rise 0.7s cubic-bezier(.2,.7,.2,1) both; }
 
-/* Liquid Glass: vidro CLARO, dá para ver tudo atrás (sem desfoque forte).
-   - Em Chrome/Android bom: a borda dobra o fundo como uma lente (LiquidGlassFilter.tsx).
-   - Nos demais: vidro limpo e translúcido, só com 1px de desfoque.
-   Ajustes fáceis: --glass-tint (quanto branco) e --glass-blur (desfoque). */
-@utility glass-pill {
-  background: color-mix(in oklab, #ffffff var(--glass-tint, 18%), transparent);
-  -webkit-backdrop-filter: blur(var(--glass-blur, 1px)) saturate(1.4) brightness(1.06);
-  backdrop-filter: blur(var(--glass-blur, 1px)) saturate(1.4) brightness(1.06);
-  border: 1px solid color-mix(in oklab, #ffffff 30%, transparent);
-  box-shadow:
-    inset 0 1px 1px color-mix(in oklab, #ffffff 80%, transparent),
-    inset 0 0 0 1px color-mix(in oklab, #ffffff 20%, transparent),
-    inset 0 -10px 18px -14px color-mix(in oklab, var(--primary-deep) 18%, transparent),
-    0 12px 32px -14px color-mix(in oklab, var(--primary-deep) 40%, transparent),
-    0 2px 6px color-mix(in oklab, #000000 8%, transparent);
-
-  /* aro de luz na borda: forte em dois cantos opostos, quase some no meio */
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(150deg, #ffffff 0%, transparent 32%, transparent 66%, #ffffff 100%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-    opacity: 0.9;
-    pointer-events: none;
-  }
-  /* reflexo de luz bem suave no topo */
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    background: radial-gradient(110% 90% at 20% -15%, color-mix(in oklab, #ffffff 40%, transparent), transparent 55%);
-    opacity: 0.45;
-    pointer-events: none;
-  }
-}
 
 /* Menu do celular: só opacity + transform (rodam na GPU, sem recalcular layout). */
 .mobile-menu {
@@ -201,7 +158,6 @@
   transition: opacity 0.18s ease, transform 0.26s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s;
 }
 
-.mobile-menu a { text-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.7); }
 
 /* Palavra verde que troca no título do hero. */
 .rotating-slot {
