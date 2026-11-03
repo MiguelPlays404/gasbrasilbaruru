@@ -142,21 +142,6 @@
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @utility animate-rise { animation: rise 0.7s cubic-bezier(.2,.7,.2,1) both; }
 
-<<<<<<< HEAD
-/* Vidro FOSCO (fosco = desfocado, como era antes do liquid glass).
-   Sem brilho branco, sem aro de luz e sem lente: só fundo suave + desfoque forte.
-   Ajustes fáceis: --glass-tint (quanto de cor de fundo) e --glass-blur (desfoque). */
-@utility glass-pill {
-  background: color-mix(in oklab, var(--background) var(--glass-tint, 70%), transparent);
-  -webkit-backdrop-filter: blur(var(--glass-blur, 18px)) saturate(1.2);
-  backdrop-filter: blur(var(--glass-blur, 18px)) saturate(1.2);
-  border: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent);
-  box-shadow:
-    0 10px 30px -16px color-mix(in oklab, var(--primary-deep) 35%, transparent),
-    0 2px 6px color-mix(in oklab, #000000 6%, transparent);
-}
-=======
->>>>>>> 8521c1788d875c38d80543e1c340d63dc88c069c
 
 /* Menu do celular: só opacity + transform (rodam na GPU, sem recalcular layout). */
 .mobile-menu {

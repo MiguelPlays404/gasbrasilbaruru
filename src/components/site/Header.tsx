@@ -5,18 +5,10 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-gas-brasil.asset.json";
 import { NAV, MSG, wa, SPRING } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
-<<<<<<< HEAD
-import { motion } from "motion/react";
-import { LiquidNav } from "./LiquidNav";
-import { SPRING } from "@/lib/site";
-=======
->>>>>>> 8521c1788d875c38d80543e1c340d63dc88c069c
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("inicio");
-  // Barra some 0,7 s depois de começar a rolar e volta 0,8 s depois de parar.
-  const [hidden, setHidden] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const tabsRef = useRef<HTMLUListElement>(null);
@@ -84,32 +76,6 @@ export function Header() {
     };
   }, []);
 
-  useEffect(() => {
-    const HIDE_AFTER = 700; // ms rolando até a barra sumir
-    const SHOW_AFTER = 800; // ms parado até a barra voltar
-    let scrolling = false;
-    let hideTimer = 0;
-    let showTimer = 0;
-    const onScroll = () => {
-      if (!scrolling) {
-        scrolling = true;
-        hideTimer = window.setTimeout(() => { setHidden(true); setOpen(false); }, HIDE_AFTER);
-      }
-      window.clearTimeout(showTimer);
-      showTimer = window.setTimeout(() => {
-        scrolling = false;
-        window.clearTimeout(hideTimer);
-        setHidden(false);
-      }, SHOW_AFTER);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.clearTimeout(hideTimer);
-      window.clearTimeout(showTimer);
-    };
-  }, []);
-
   const select = (id: string) => { lockRef.current = id; setActive(id); };
 
   // Fecha o menu ao tocar fora ou apertar Esc.
@@ -165,20 +131,12 @@ export function Header() {
     <>
     <motion.header
       ref={headerRef}
-<<<<<<< HEAD
-      initial={{ y: -40, opacity: 0 }}
-      animate={hidden ? { y: -90, opacity: 0 } : { y: 0, opacity: 1 }}
-      transition={SPRING}
-      style={{ pointerEvents: hidden ? "none" : "auto" }}
-      className="glass-pill fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[1.75rem] md:inset-x-6 md:top-4"
-=======
       initial={false}
       animate={{ y: scrolling ? -110 : 0, opacity: scrolling ? 0 : 1 }}
       transition={reducedMotion ? { duration: 0 } : SPRING}
       data-scrolling={scrolling}
       {...(scrolling ? { inert: true } : {})}
       className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[1.75rem] border border-border bg-card shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--primary-deep)_45%,transparent)] md:inset-x-6 md:top-4"
->>>>>>> 8521c1788d875c38d80543e1c340d63dc88c069c
     >
       <div className="grid h-16 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 pl-4 pr-2 lg:pl-5">
         <a href="#inicio" className="flex shrink-0 items-center gap-2" aria-label="Gás Brasil — início">
