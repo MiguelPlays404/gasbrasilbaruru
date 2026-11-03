@@ -1,4 +1,4 @@
-- [ ] Trocar a foto e apresentar os quatro tamanhos da imagem enviada.
-- [ ] Manter o sublinhado contínuo somente no computador.
-- [ ] Ocultar a barra durante a rolagem e trazê-la de volta suavemente ao parar.
-- [ ] Verificar computador, tablet e celular.
+- [x] Trocar a foto e apresentar os quatro tamanhos da imagem enviada.
+- [x] Manter o sublinhado contínuo somente no computador.
+- [x] Ocultar a barra durante a rolagem e trazê-la de volta suavemente ao parar.
+- [x] Verificar computador, tablet e celular.
