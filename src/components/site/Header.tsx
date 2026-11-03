@@ -20,7 +20,7 @@ export function Header() {
     const compute = () => {
       raf = 0;
       if (lockRef.current) { setActive(lockRef.current); return; }
-      let id = ids[0];
+      let id: string = ids[0] ?? "inicio";
       if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
         id = ids[ids.length - 1]; // chegou no fim da página
       } else {
