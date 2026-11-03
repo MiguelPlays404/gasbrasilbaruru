@@ -11,7 +11,7 @@ export const MSG = {
   entrega: "Olá! Gostaria de solicitar uma entrega de gás em Bauru.",
   instalacao: "Olá! Gostaria de consultar a disponibilidade de instalação de gás.",
   retirada: "Olá! Gostaria de consultar a disponibilidade para retirar meu botijão no local.",
-  botijoes: "Olá! Gostaria de consultar a disponibilidade dos botijões P-8, P-13 e P-20.",
+  botijoes: "Olá! Gostaria de consultar a disponibilidade dos botijões P-8, P-13, P-20 e P-45.",
   gasDoPovo: "Olá! Gostaria de saber como funciona o atendimento com o benefício Gás do Povo na Gás Brasil.",
   final: "Olá! Acessei o site da Gás Brasil e gostaria de fazer um pedido.",
 };
@@ -25,6 +25,13 @@ export const NAV = [
   { id: "avaliacoes", label: "Avaliações" },
   { id: "localizacao", label: "Localização" },
 ];
+
+export const CYLINDERS = [
+  { model: "P-8", kg: 8 },
+  { model: "P-13", kg: 13 },
+  { model: "P-20", kg: 20 },
+  { model: "P-45", kg: 45 },
+] as const;
 
 export const ADDRESS_LINE = "Av. Dr. Nuno de Assis, 1166 - Centro";
 export const ADDRESS_CITY = "Bauru - SP, 17010-120";

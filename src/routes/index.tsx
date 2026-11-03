@@ -3,7 +3,7 @@ import { MapPin, Phone, ArrowRight, Truck, Wrench, Store } from "lucide-react";
 import heroImg from "@/assets/hero-entrega.jpg";
 import instalacaoImg from "@/assets/instalacao.jpg";
 import retiradaImg from "@/assets/retirada.jpg";
-import botijoesImg from "@/assets/botijoes.jpg";
+import botijoesImg from "@/assets/botijoes-liquigas.jpeg.asset.json";
 import liquigas from "@/assets/liquigas.asset.json";
 import gasDoPovo from "@/assets/gas-do-povo.asset.json";
 import parceria from "@/assets/parceria.asset.json";
@@ -15,10 +15,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { getPublicReviews } from "@/lib/reviews.functions";
 import { Reveal } from "@/components/site/Reveal";
 import { RotatingWord } from "@/components/site/RotatingWord";
-import { ADDRESS_CITY, ADDRESS_LINE, MAPS_URL, MSG, NAV, PHONE_DISPLAY, PHONE_TEL, wa } from "@/lib/site";
+import { ADDRESS_CITY, ADDRESS_LINE, CYLINDERS, MAPS_URL, MSG, NAV, PHONE_DISPLAY, PHONE_TEL, wa } from "@/lib/site";
 
-const TITLE = "Gás Brasil — Entrega de gás em Bauru/SP | P-8, P-13 e P-20";
-const DESC = "Entrega, instalação e retirada de gás em toda Bauru. Botijões P-8, P-13 e P-20, aceitamos Gás do Povo e parcelamos em até 3x. Peça pelo WhatsApp.";
+const TITLE = "Gás Brasil — Entrega de gás em Bauru/SP | P-8, P-13, P-20 e P-45";
+const DESC = "Entrega, instalação e retirada de gás em toda Bauru. Consulte botijões P-8, P-13, P-20 e P-45. Aceitamos Gás do Povo e parcelamos em até 3x. Peça pelo WhatsApp.";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/")({
           areaServed: { "@type": "City", name: "Bauru", containedInPlace: "São Paulo, Brasil" },
           hasMap: MAPS_URL,
           address: { "@type": "PostalAddress", streetAddress: "Av. Dr. Nuno de Assis, 1166", addressLocality: "Bauru", addressRegion: "SP", postalCode: "17010-120", addressCountry: "BR" },
-          makesOffer: ["Botijão P-8 (8 kg)", "Botijão P-13 (13 kg)", "Botijão P-20 (20 kg)"].map((n) => ({ "@type": "Offer", itemOffered: { "@type": "Product", name: n } })),
+          makesOffer: CYLINDERS.map(({ model, kg }) => ({ "@type": "Offer", itemOffered: { "@type": "Product", name: `Botijão ${model} (${kg} kg)` } })),
         }),
       },
     ],
@@ -70,7 +70,7 @@ const FAQ = [
   ["Posso solicitar entrega pelo WhatsApp?", "Sim! Você pode entrar em contato diretamente com nossa equipe e consultar seu pedido."],
   ["Vocês também realizam instalação?", "Sim! Você pode consultar a disponibilidade da instalação pelo WhatsApp."],
   ["Posso retirar o gás pessoalmente?", "Sim! Além da entrega, você pode optar pela retirada no estabelecimento."],
-  ["Quais tamanhos de botijão estão disponíveis?", "A Gás Brasil apresenta opções de botijão P-8 (8 kg), P-13 (13 kg) e P-20 (20 kg). Consulte a disponibilidade pelo WhatsApp."],
+  ["Quais tamanhos de botijão estão disponíveis?", "A Gás Brasil apresenta opções de botijão P-8 (8 kg), P-13 (13 kg), P-20 (20 kg) e P-45 (45 kg). Consulte a disponibilidade pelo WhatsApp."],
   ["A Gás Brasil aceita Gás do Povo?", "Sim! Consulte pelo WhatsApp as informações sobre o atendimento pelo benefício."],
   ["Posso parcelar meu gás?", "Sim! Existe a possibilidade de parcelamento em até 3 vezes, conforme as condições de pagamento."],
 ];
@@ -186,12 +186,12 @@ function Index() {
               <Reveal><h2 className="text-4xl font-extrabold leading-[1.05] md:text-5xl">Um tamanho para cada necessidade.</h2></Reveal>
               <p className="text-lg text-muted-foreground">A Gás Brasil oferece diferentes opções de botijão para você encontrar o que precisa. Consulte a disponibilidade pelo nosso WhatsApp.</p>
             </div>
-            <img src={botijoesImg} alt="Botijões de gás P-8, P-13 e P-20 lado a lado" width={1600} height={912} loading="lazy" className="mx-auto mt-10 w-full max-w-4xl mix-blend-multiply" />
-            <ul className="mx-auto grid max-w-4xl grid-cols-3 text-center">
-              {[["P-8", "8 kg"], ["P-13", "13 kg"], ["P-20", "20 kg"]].map(([m, kg]) => (
-                <li key={m}>
-                  <p className="font-display text-2xl font-extrabold text-primary md:text-4xl">Botijão {m}</p>
-                  <p className="text-muted-foreground">{kg}</p>
+            <img src={botijoesImg.url} alt="Liquigás: botijões P-8, P-13, P-20 e P-45 lado a lado, com seus tamanhos proporcionais" width={1029} height={768} loading="lazy" className="mx-auto mt-10 block h-auto w-full max-w-4xl object-contain" />
+            <ul className="mx-auto mt-6 grid max-w-4xl grid-cols-2 gap-6 text-center sm:grid-cols-4">
+              {CYLINDERS.map(({ model, kg }) => (
+                <li key={model} className="min-w-0">
+                  <p className="font-display text-xl font-extrabold text-primary md:text-2xl">Botijão {model}</p>
+                  <p className="text-muted-foreground">{kg} kg</p>
                 </li>
               ))}
             </ul>
