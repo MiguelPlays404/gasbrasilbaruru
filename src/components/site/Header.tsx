@@ -17,20 +17,33 @@ export function Header() {
   const [underline, setUnderline] = useState({ x: 0, width: 0 });
 
   useEffect(() => {
-    let timer: ReturnType<typeof setTimeout> | undefined;
+    let showTimer: ReturnType<typeof setTimeout> | undefined;
+    let hideTimer: ReturnType<typeof setTimeout> | undefined;
     let lastY = window.scrollY;
+    let hidden = false;
     const onScroll = () => {
       if (window.scrollY === lastY) return;
       lastY = window.scrollY;
-      setScrolling(true);
       setOpen(false);
-      clearTimeout(timer);
-      timer = setTimeout(() => setScrolling(false), 180);
+      // some 0,6s depois que a rolagem começa; volta 0,7s depois que ela para
+      clearTimeout(showTimer);
+      showTimer = setTimeout(() => {
+        hidden = false;
+        setScrolling(false);
+      }, 700);
+      if (!hidden && !hideTimer) {
+        hideTimer = setTimeout(() => {
+          hideTimer = undefined;
+          hidden = true;
+          setScrolling(true);
+        }, 600);
+      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
-      clearTimeout(timer);
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
     };
   }, []);
 
@@ -136,7 +149,7 @@ export function Header() {
       transition={reducedMotion ? { duration: 0 } : SPRING}
       data-scrolling={scrolling}
       {...(scrolling ? { inert: true } : {})}
-      className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[1.75rem] border border-border bg-card shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--primary-deep)_45%,transparent)] md:inset-x-6 md:top-4"
+      className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[1.75rem] border border-border bg-card/75 shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--primary-deep)_45%,transparent)] backdrop-blur-xl backdrop-saturate-150 md:inset-x-6 md:top-4"
     >
       <div className="grid h-16 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 pl-4 pr-2 lg:pl-5">
         <a href="#inicio" className="flex shrink-0 items-center gap-2" aria-label="Gás Brasil — início">
@@ -202,7 +215,7 @@ export function Header() {
       aria-label="Menu móvel"
       aria-hidden={!open}
       data-open={open}
-      className="mobile-menu fixed inset-x-3 top-[5.25rem] z-50 mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-[0_12px_32px_-16px_color-mix(in_oklab,var(--primary-deep)_40%,transparent)] md:inset-x-6 md:top-[5.5rem] lg:hidden"
+      className="mobile-menu fixed inset-x-3 top-[5.25rem] z-50 mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] border border-border bg-card/85 shadow-[0_12px_32px_-16px_color-mix(in_oklab,var(--primary-deep)_40%,transparent)] backdrop-blur-xl backdrop-saturate-150 md:inset-x-6 md:top-[5.5rem] lg:hidden"
       {...(!open ? { inert: true } : {})}
     >
       <ul className="grid px-4 py-3">
