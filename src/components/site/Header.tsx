@@ -149,7 +149,7 @@ export function Header() {
       transition={reducedMotion ? { duration: 0 } : SPRING}
       data-scrolling={scrolling}
       {...(scrolling ? { inert: true } : {})}
-      className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[1.75rem] border border-white/40 bg-card/40 shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--primary-deep)_45%,transparent)] backdrop-blur-2xl backdrop-saturate-150 md:inset-x-6 md:top-4"
+      className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[1.75rem] border border-white/30 bg-card/20 shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--primary-deep)_45%,transparent)] backdrop-blur-2xl backdrop-saturate-150 md:inset-x-6 md:top-4"
     >
       <div className="grid h-16 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 pl-4 pr-2 lg:pl-5">
         <a href="#inicio" className="flex shrink-0 items-center gap-2" aria-label="Gás Brasil — início">
@@ -215,7 +215,7 @@ export function Header() {
       aria-label="Menu móvel"
       aria-hidden={!open}
       data-open={open}
-      className="mobile-menu fixed inset-x-3 top-[5.25rem] z-50 mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] border border-white/40 bg-card/50 shadow-[0_12px_32px_-16px_color-mix(in_oklab,var(--primary-deep)_40%,transparent)] backdrop-blur-2xl backdrop-saturate-150 md:inset-x-6 md:top-[5.5rem] lg:hidden"
+      className="mobile-menu fixed inset-x-3 top-[5.25rem] z-50 mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] border border-white/30 bg-card/30 shadow-[0_12px_32px_-16px_color-mix(in_oklab,var(--primary-deep)_40%,transparent)] backdrop-blur-2xl backdrop-saturate-150 md:inset-x-6 md:top-[5.5rem] lg:hidden"
       {...(!open ? { inert: true } : {})}
     >
       <ul className="grid px-4 py-3">
