@@ -12,38 +12,16 @@ export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const tabsRef = useRef<HTMLUListElement>(null);
-  const [scrolling, setScrolling] = useState(false);
   const reducedMotion = useReducedMotion();
   const [underline, setUnderline] = useState({ x: 0, width: 0 });
 
   useEffect(() => {
-    let showTimer: ReturnType<typeof setTimeout> | undefined;
-    let hideTimer: ReturnType<typeof setTimeout> | undefined;
-    let lastY = window.scrollY;
-    let hidden = false;
     const onScroll = () => {
-      if (window.scrollY === lastY) return;
-      lastY = window.scrollY;
       setOpen(false);
-      // some 0,4s depois que a rolagem começa; volta 0,4s depois que ela para
-      clearTimeout(showTimer);
-      showTimer = setTimeout(() => {
-        hidden = false;
-        setScrolling(false);
-      }, 400);
-      if (!hidden && !hideTimer) {
-        hideTimer = setTimeout(() => {
-          hideTimer = undefined;
-          hidden = true;
-          setScrolling(true);
-        }, 400);
-      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
-      clearTimeout(showTimer);
-      clearTimeout(hideTimer);
     };
   }, []);
 
@@ -145,10 +123,7 @@ export function Header() {
     <motion.header
       ref={headerRef}
       initial={false}
-      animate={{ y: scrolling ? -110 : 0, opacity: scrolling ? 0 : 1 }}
       transition={reducedMotion ? { duration: 0 } : SPRING}
-      data-scrolling={scrolling}
-      {...(scrolling ? { inert: true } : {})}
       className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[1.75rem] border border-white/25 bg-card/10 shadow-[0_10px_30px_-18px_color-mix(in_oklab,var(--primary-deep)_45%,transparent)] backdrop-blur-md backdrop-saturate-150 md:inset-x-6 md:top-4"
     >
       <div className="grid h-16 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 pl-4 pr-2 lg:pl-5">
