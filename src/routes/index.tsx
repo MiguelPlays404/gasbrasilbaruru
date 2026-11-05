@@ -73,7 +73,7 @@ function Index() {
         {/* HERO */}
         <section id="inicio" className="relative overflow-hidden pt-24 md:pt-28">
           <div className="container-page grid items-center gap-10 pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24">
-            <Reveal>
+            <Reveal immediate>
               <p className="eyebrow-line text-sm font-semibold text-secondary">Entrega rápida no seu bairro. Atendemos toda Bauru.</p>
               <h1 className="mt-5 text-[2.6rem] font-extrabold leading-[1.02] text-foreground sm:text-6xl lg:text-[4.2rem]">
                 Entrega de gás em <RotatingWord /> com rapidez e praticidade.
