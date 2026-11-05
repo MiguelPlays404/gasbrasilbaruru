@@ -73,8 +73,8 @@ export function RotatingWord() {
         style={widths ? { width: widths[index] } : undefined}
       >
         &#8203;
-        {!widths && <span className="rotating-glyphs invisible" data-word={WORDS[0]} />}
-        {WORDS.map((word, i) => (
+        {!widths && <span className="rotating-glyphs" data-word={WORDS[0]} />}
+        {widths && WORDS.map((word, i) => (
           <span
             key={word}
             className="rotating-word"
