@@ -2,4 +2,4 @@
 - [x] Manter o sublinhado contínuo somente no computador.
 - [x] Ocultar a barra durante a rolagem e trazê-la de volta suavemente ao parar.
 - [x] Verificar computador, tablet e celular.
-- [ ] Otimizar a primeira exibição no celular sem mudar a estética e verificar navegação e carregamento.
+- [x] Otimizar a primeira exibição no celular sem mudar a estética e verificar navegação e carregamento.
