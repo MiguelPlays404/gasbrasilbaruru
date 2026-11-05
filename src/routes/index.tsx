@@ -4,6 +4,10 @@ import hero640 from "@/assets/hero-entrega-640.webp";
 import hero960 from "@/assets/hero-entrega-960.webp";
 import hero1280 from "@/assets/hero-entrega-1280.webp";
 import hero1600 from "@/assets/hero-entrega-1600.webp";
+import heroAvif640 from "@/assets/hero-entrega-640.avif";
+import heroAvif960 from "@/assets/hero-entrega-960.avif";
+import heroAvif1280 from "@/assets/hero-entrega-1280.avif";
+import heroAvif1600 from "@/assets/hero-entrega-1600.avif";
 import instalacaoImg from "@/assets/instalacao.jpg";
 import retiradaImg from "@/assets/retirada.jpg";
 import botijoesImg from "@/assets/botijoes-liquigas.jpeg.asset.json";
@@ -21,7 +25,8 @@ import { ADDRESS_CITY, ADDRESS_LINE, CYLINDERS, MAPS_URL, MSG, PHONE_DISPLAY, PH
 import { organizationNode, PAGES, pageHead, webPageNode, websiteNode } from "@/lib/seo";
 
 const HERO_SRCSET = `${hero640} 640w, ${hero960} 960w, ${hero1280} 1280w, ${hero1600} 1600w`;
-const HERO_SIZES = "(min-width: 1024px) 45vw, 100vw";
+const HERO_AVIF_SRCSET = `${heroAvif640} 640w, ${heroAvif960} 960w, ${heroAvif1280} 1280w, ${heroAvif1600} 1600w`;
+const HERO_SIZES = "(min-width: 1216px) 520px, (min-width: 1024px) calc((100vw - 120px) * 0.475), (min-width: 768px) calc(100vw - 64px), calc(100vw - 40px)";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -40,7 +45,7 @@ export const Route = createFileRoute("/")({
   head: () => {
     const head = pageHead(PAGES.home, { schema: [organizationNode(), websiteNode(), webPageNode(PAGES.home)] });
     // Pré-carrega a imagem do hero (maior elemento da tela) para melhorar o LCP.
-    head.links.push({ rel: "preload", as: "image", href: hero960, imageSrcSet: HERO_SRCSET, imageSizes: HERO_SIZES, type: "image/webp", fetchPriority: "high" } as never);
+    head.links.push({ rel: "preload", as: "image", href: heroAvif960, imageSrcSet: HERO_AVIF_SRCSET, imageSizes: HERO_SIZES, type: "image/avif", fetchPriority: "high" });
     return head;
   },
   component: Index,
@@ -99,7 +104,10 @@ function Index() {
             </Reveal>
             <div className="relative">
               <div className="absolute -right-24 -top-10 hidden h-[110%] w-[70%] bg-primary lg:block" aria-hidden="true" />
-              <img src={hero960} srcSet={HERO_SRCSET} sizes={HERO_SIZES} alt="Entregador da Gás Brasil levando um botijão até a porta de uma casa em Bauru" width={1600} height={1104} fetchPriority="high" decoding="async" className="relative aspect-[4/3] w-full object-cover shadow-soft" />
+              <picture>
+                <source type="image/avif" srcSet={HERO_AVIF_SRCSET} sizes={HERO_SIZES} />
+                <img src={hero960} srcSet={HERO_SRCSET} sizes={HERO_SIZES} alt="Entregador da Gás Brasil levando um botijão até a porta de uma casa em Bauru" width={1600} height={1104} fetchPriority="high" decoding="async" className="relative aspect-[4/3] w-full object-cover shadow-soft" />
+              </picture>
             </div>
           </div>
         </section>
