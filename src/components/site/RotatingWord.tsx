@@ -7,6 +7,9 @@ import { useEffect, useRef, useState } from "react";
  * - A largura do espaço acompanha a palavra atual, então "com rapidez e
  *   praticidade." fica sempre colado, sem buraco.
  * - "Bauru" fica escondido em texto para leitores de tela e para o Google.
+ * - As palavras que giram são desenhadas por CSS (data-word + ::before), então o texto
+ *   do <h1> lido por robôs e leitores de tela é só "Entrega de gás em Bauru com rapidez
+ *   e praticidade." — sem repetições.
  */
 const WORDS = ["Bauru", "sua casa", "todo bairro", "minutos", "sua porta"] as const;
 const INTERVAL = 2600;
@@ -70,23 +73,20 @@ export function RotatingWord() {
         style={widths ? { width: widths[index] } : undefined}
       >
         &#8203;
-        {!widths && <span className="invisible">{WORDS[0]}</span>}
+        {!widths && <span className="rotating-glyphs invisible" data-word={WORDS[0]} />}
         {WORDS.map((word, i) => (
           <span
             key={word}
             className="rotating-word"
+            data-word={word}
             data-state={i === index ? "active" : i === prev ? "out" : "idle"}
-          >
-            {word}
-          </span>
+          />
         ))}
       </span>
       {/* Medidores invisíveis (só para calcular a largura de cada palavra) */}
       <span aria-hidden="true" className="pointer-events-none invisible absolute left-0 top-0 whitespace-nowrap">
         {WORDS.map((word, i) => (
-          <span key={word} ref={(el) => { sizers.current[i] = el; }} className="inline-block">
-            {word}
-          </span>
+          <span key={word} ref={(el) => { sizers.current[i] = el; }} className="rotating-glyphs inline-block" data-word={word} />
         ))}
       </span>
     </span>

@@ -12,7 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as GasDoPovoRouteImport } from './routes/gas-do-povo'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SegurancaGasRouteImport } from './routes/seguranca-gas'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedAdminAvaliacoesRouteImport } from './routes/_authenticated/admin.avaliacoes'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,9 +37,49 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GasDoPovoRoute = GasDoPovoRouteImport.update({
+  id: '/gas-do-povo',
+  path: '/gas-do-povo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
   id: '/privacidade',
   path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SegurancaGasRoute = SegurancaGasRouteImport.update({
+  id: '/seguranca-gas',
+  path: '/seguranca-gas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminAvaliacoesRoute =
@@ -44,13 +92,29 @@ const AuthenticatedAdminAvaliacoesRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/gas-do-povo': typeof GasDoPovoRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/seguranca-gas': typeof SegurancaGasRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/gas-do-povo': typeof GasDoPovoRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/seguranca-gas': typeof SegurancaGasRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
 }
 export interface FileRoutesById {
@@ -58,20 +122,60 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/gas-do-povo': typeof GasDoPovoRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/seguranca-gas': typeof SegurancaGasRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/_authenticated/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/privacidade' | '/admin/avaliacoes'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/contato'
+    | '/gas-do-povo'
+    | '/llms.txt'
+    | '/privacidade'
+    | '/robots.txt'
+    | '/seguranca-gas'
+    | '/sitemap.xml'
+    | '/sobre'
+    | '/termos'
+    | '/admin/avaliacoes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/privacidade' | '/admin/avaliacoes'
+  to:
+    | '/'
+    | '/auth'
+    | '/contato'
+    | '/gas-do-povo'
+    | '/llms.txt'
+    | '/privacidade'
+    | '/robots.txt'
+    | '/seguranca-gas'
+    | '/sitemap.xml'
+    | '/sobre'
+    | '/termos'
+    | '/admin/avaliacoes'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/contato'
+    | '/gas-do-povo'
+    | '/llms.txt'
     | '/privacidade'
+    | '/robots.txt'
+    | '/seguranca-gas'
+    | '/sitemap.xml'
+    | '/sobre'
+    | '/termos'
     | '/_authenticated/admin/avaliacoes'
   fileRoutesById: FileRoutesById
 }
@@ -79,7 +183,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ContatoRoute: typeof ContatoRoute
+  GasDoPovoRoute: typeof GasDoPovoRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SegurancaGasRoute: typeof SegurancaGasRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SobreRoute: typeof SobreRoute
+  TermosRoute: typeof TermosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -105,11 +217,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gas-do-povo': {
+      id: '/gas-do-povo'
+      path: '/gas-do-povo'
+      fullPath: '/gas-do-povo'
+      preLoaderRoute: typeof GasDoPovoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacidade': {
       id: '/privacidade'
       path: '/privacidade'
       fullPath: '/privacidade'
       preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seguranca-gas': {
+      id: '/seguranca-gas'
+      path: '/seguranca-gas'
+      fullPath: '/seguranca-gas'
+      preLoaderRoute: typeof SegurancaGasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/avaliacoes': {
@@ -137,7 +305,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ContatoRoute: ContatoRoute,
+  GasDoPovoRoute: GasDoPovoRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   PrivacidadeRoute: PrivacidadeRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SegurancaGasRoute: SegurancaGasRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SobreRoute: SobreRoute,
+  TermosRoute: TermosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

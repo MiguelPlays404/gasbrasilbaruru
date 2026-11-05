@@ -1,0 +1,97 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://screenshot-to-spark-6156.lovable.app/#organization",
+      "name": "Gás Brasil",
+      "url": "https://screenshot-to-spark-6156.lovable.app/",
+      "description": "Revenda e entrega de gás com atendimento em toda Bauru/SP.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://screenshot-to-spark-6156.lovable.app/__l5e/assets-v1/216f2cd0-8c44-425f-b8b6-20a2ff1727bc/logo-gas-brasil.jpg"
+      },
+      "image": "https://screenshot-to-spark-6156.lovable.app/og-gas-brasil.jpg",
+      "telephone": "+5514991777941",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Dr. Nuno de Assis, 1166",
+        "addressLocality": "Bauru",
+        "addressRegion": "SP",
+        "postalCode": "17010-120",
+        "addressCountry": "BR"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Bauru",
+        "containedInPlace": {
+          "@type": "AdministrativeArea",
+          "name": "São Paulo"
+        }
+      },
+      "hasMap": "https://maps.app.goo.gl/7swTfD3xbqgDToV79",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+5514991777941",
+        "contactType": "customer service",
+        "availableLanguage": "pt-BR",
+        "areaServed": "BR-SP"
+      },
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "Botijão P-8 (8 kg)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "Botijão P-13 (13 kg)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "Botijão P-20 (20 kg)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "Botijão P-45 (45 kg)"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://screenshot-to-spark-6156.lovable.app/#website",
+      "url": "https://screenshot-to-spark-6156.lovable.app/",
+      "name": "Gás Brasil",
+      "inLanguage": "pt-BR",
+      "publisher": {
+        "@id": "https://screenshot-to-spark-6156.lovable.app/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://screenshot-to-spark-6156.lovable.app/#webpage",
+      "url": "https://screenshot-to-spark-6156.lovable.app/",
+      "name": "Gás Brasil — Entrega de gás em Bauru/SP",
+      "description": "Entrega, instalação e retirada de gás em toda Bauru. Botijões P-8, P-13, P-20 e P-45, Gás do Povo e parcelamento em até 3x. Peça pelo WhatsApp.",
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@id": "https://screenshot-to-spark-6156.lovable.app/#website"
+      },
+      "about": {
+        "@id": "https://screenshot-to-spark-6156.lovable.app/#organization"
+      },
+      "dateModified": "2026-11-04"
+    }
+  ]
+}
