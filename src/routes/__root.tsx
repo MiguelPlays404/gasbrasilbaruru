@@ -11,6 +11,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import displayFont from "@/assets/manrope-latin.woff2?url";
+import bodyFont from "@/assets/dm-sans-latin.woff2?url";
 import { supabase } from "@/integrations/supabase/client";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -95,9 +97,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" },
+      { rel: "preload", as: "font", href: displayFont, type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", as: "font", href: bodyFont, type: "font/woff2", crossOrigin: "anonymous" },
     ],
   }),
   shellComponent: RootShell,
