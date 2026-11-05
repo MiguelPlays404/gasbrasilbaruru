@@ -11,8 +11,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import displayFont from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url";
-import bodyFont from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url";
+import displayFont from "@/assets/manrope-latin.woff2?url";
+import bodyFont from "@/assets/dm-sans-latin.woff2?url";
 import { supabase } from "@/integrations/supabase/client";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
