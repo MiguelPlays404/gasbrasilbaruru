@@ -15,3 +15,4 @@
 - Desktop navigation uses one persistent measured underline rather than conditional shared-layout elements to avoid disappearing during pointer transitions; the header responds to scroll activity with spring movement and reduced-motion support.
 - Above-fold headline content must be visible in SSR, including the initial rotating word; entrance motion must not hide the first paint, to protect mobile LCP.
 - Serve preloaded Latin variable fonts locally and responsive AVIF hero images with WebP fallback to avoid external font waterfalls and oversized mobile transfers.
+- Copyright shortcut notices are informational only; never treat browser inspection restrictions as authorization or interfere with browser security and accessibility controls.
