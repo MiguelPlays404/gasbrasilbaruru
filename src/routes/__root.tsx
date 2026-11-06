@@ -15,6 +15,7 @@ import displayFont from "@/assets/manrope-latin.woff2?url";
 import bodyFont from "@/assets/dm-sans-latin.woff2?url";
 import { supabase } from "@/integrations/supabase/client";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { RightsNotice } from "@/components/site/RightsNotice";
 
 function NotFoundComponent() {
   return (
@@ -135,6 +136,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <RightsNotice />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
