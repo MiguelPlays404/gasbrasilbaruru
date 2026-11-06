@@ -4,3 +4,6 @@
 - [x] Verificar computador, tablet e celular.
 - [x] Otimizar a primeira exibição no celular sem mudar a estética e verificar navegação e carregamento.
 - [x] Reduzir a espera das fontes e da foto principal preservando a aparência; verificar o resultado.
+- [ ] Exibir aviso de direitos ao tentar inspecionar sem prometer proteção do código.
+- [ ] Criar e verificar acesso administrativo da conta solicitada.
+- [x] Manter o acesso atual sem bloqueios personalizados, conforme escolha da cliente.
